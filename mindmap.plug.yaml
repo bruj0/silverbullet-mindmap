@@ -1,0 +1,24 @@
+name: mindmap
+assets:
+  - "assets/*"
+  # User facing
+functions:
+  toggle:
+    path: "./mindmap.ts:togglePreview"
+    command:
+      name: "Mindmap Preview: Toggle"
+      key: Ctrl-m
+      mac: Cmd-m
+
+  preview:
+    path: "./preview.ts:updateMindMapPreview"
+    events:
+      - plug:load
+      - editor:updated
+      - editor:pageLoaded
+      - editor:pageReloaded
+
+  previewClickHandler:
+    path: "./preview.ts:previewClickHandler"
+    events:
+      - preview:click
