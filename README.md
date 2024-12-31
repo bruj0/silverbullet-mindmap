@@ -51,10 +51,10 @@ Create a markdwon file using [MarkMap format](https://markmap.js.org/repl).
 
     ``js     console.log('hello, JavaScript')     ``
 
-| Products | Price |
-| -------- | ----- |
-| Apple    | 4     |
-| Banana   | 2     |
+    | Products | Price |
+    | -------- | ----- |
+    | Apple    | 4     |
+    | Banana   | 2     |
 
     ![](https://markmap.js.org/favicon.png)
 
