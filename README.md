@@ -1,16 +1,24 @@
 # Silver Bullet plug for mindmap diagram (online)
 
-This plug adds basic [Markmap](https://markmap.js.org) to Silver Bullet.
 
-**Note:** The Markmap library itself is not bundled with this plug, it pulls the JavaScript from the JSDelivr CDN. This means _this plug will not work without an Internet connection_. The reason for this is primarily plug size (bundling the library would amount to 1.1MB). This way Mermaid/Plantuml is only loaded on pages with actual Mermaid/Plantuml diagrams rather than on every SB load.
+`silverbullet-mindmap` is a [Plug](https://silverbullet.md/Plugs) for [SilverBullet](https://silverbullet.md/) to render mindmap diagrams based on [Markmap](https://markmap.js.org).
+
+**Note:** The Markmap library itself is not bundled with this plug, it pulls the JavaScript from the JSDelivr CDN. This means _this plug will not work without an Internet connection_. The reason for this is primarily plug size (bundling the library would amount to 1.1MB). This way Markmap is only loaded on pages with actual mindmap diagrams rather than on every SB load.
 
 ## Installation
 
-Run the {[Plugs: Add]} command and paste in: `github:malys/silverbullet-mindmap/mindmap.plug.js`
+If you run SilverBullet [using Docker](https://silverbullet.md/Install/Docker), Git is already included.
+Otherwise install Git from your system's package manager, or following [Git documentation](https://git-scm.com/).
 
-That's all!
+Open your `PLUGS` note in SilverBullet and add this plug to the list:
 
-## Use
+```yaml
+- github:malys/silverbullet-mindmap/mindmap.plug.js
+```
+
+Then run the {[Plugs: Update]} command and off you go!
+
+## Usage
 
 Create a markdwon file using [MarkMap format](https://markmap.js.org/repl).
 
@@ -58,7 +66,47 @@ Create a markdwon file using [MarkMap format](https://markmap.js.org/repl).
 
     ![](https://markmap.js.org/favicon.png)
 
-**Launch "Mindmap Preview: Toggle" and your md file is rendered to mindmap.**
+### Command
 
-Inspired by [*markdown plug*](https://github.com/silverbulletmd/silverbullet) from @Zef Hemel
+- {[Mindmap Preview: Toggle]} or [CTRL+m]
+
+### Rendering
+
+![](./mindmap.png)
+
+
+## Contributing
+
+If you find bugs, report them on the [issue tracker on GitHub](https://github.com/malys/silverbullet-mindmap/issues).
+I doubt I will implement more features, Pull Requests are preferred.
+
+### Building from source
+
+To build this plug, make sure you have [SilverBullet installed](https://silverbullet.md/Install). Then, build the plug with:
+
+```shell
+deno task build
+```
+
+Or to watch for changes and rebuild automatically
+
+```shell
+deno task watch
+```
+
+Then, copy the resulting `.plug.js` file into your space's `_plug` folder. Or build and copy in one command:
+
+```shell
+deno task build && cp *.plug.js /my/space/_plug/
+```
+
+SilverBullet will automatically sync and load the new version of the plug (or speed up this process by running the {[Sync: Now]} command).
+
+## License
+
+MIT, following SilverBullet
+
+## Thanks
+
+Inspired by [*Markdown Plug*](https://github.com/silverbulletmd/silverbullet) from @Zef Hemel
 
