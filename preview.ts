@@ -7,16 +7,17 @@ import {
 import { encodeBase64 } from "@std/encoding";
 
 export async function updateMindMapPreview() {
-  if (!(await clientStore.get("enableMindMapPreview"))) {
-    return;
-  }
-  const content = await editor.getText();
-  const contentBase64 = encodeBase64(content);
+  try {
+    if (!(await clientStore.get("enableMindMapPreview"))) {
+      return;
+    }
+    const content = await editor.getText();
+    const contentBase64 = encodeBase64(content);
 
-  const css = await asset.readAsset("markdown", "assets/preview.css");
-  const js = await asset.readAsset("markdown", "assets/preview.js");
+    const css = await asset.readAsset("markdown", "assets/preview.css");
+    const js = await asset.readAsset("markdown", "assets/preview.js");
 
-  const mindmapJS = `
+    const mindmapJS = `
 loadJsByUrl("https://cdn.jsdelivr.net/npm/markmap-lib", "sha256-ulWyGiHbVRTYcTWQHIHT/r9sLSbO/4M6ZwoGj08JKcE=").then(() => {
 
   const { Transformer } = window.markmap;
@@ -37,12 +38,12 @@ loadJsByUrl("https://cdn.jsdelivr.net/npm/markmap-lib", "sha256-ulWyGiHbVRTYcTWQ
 });
   `
 
-  const customStyles = await editor.getUiOption("customStyles");
-  const toolbar = renderToolbar();
-  await editor.showPanel(
-    "rhs",
-    2,
-    `
+    const customStyles = await editor.getUiOption("customStyles");
+    const toolbar = renderToolbar();
+    await editor.showPanel(
+      "rhs",
+      2,
+      `
       <link rel="stylesheet" href="/.client/main.css" />
       <style>
         ${css}
@@ -59,8 +60,11 @@ loadJsByUrl("https://cdn.jsdelivr.net/npm/markmap-lib", "sha256-ulWyGiHbVRTYcTWQ
       </style>
       <div id="root" class="sb-preview">${toolbar}<svg id="mindmap"></svg></div>
     `,
-    js + mindmapJS,
-  );
+      js + mindmapJS,
+    );
+  } catch (err) {
+    console.error("plugin failed", err);
+  }
 }
 
 function renderToolbar(): string {
