@@ -18,7 +18,7 @@ export async function updateMindMapPreview() {
     const js = await asset.readAsset("markdown", "assets/preview.js");
 
     const mindmapJS = `
-loadJsByUrl("https://cdn.jsdelivr.net/npm/markmap-lib", "sha256-ulWyGiHbVRTYcTWQHIHT/r9sLSbO/4M6ZwoGj08JKcE=").then(() => {
+loadJsByUrl("https://cdn.jsdelivr.net/npm/markmap-lib@0.18.5/dist/browser/index.iife.min.js", "sha256-Ilj0cz3eW2xCzl4P6p7w7fqw5BieB32Ar5FR1eQGNAw=").then(() => {
 
   const { Transformer } = window.markmap;
   const transformer = new Transformer();
